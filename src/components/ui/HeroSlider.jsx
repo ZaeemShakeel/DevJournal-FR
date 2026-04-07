@@ -53,9 +53,9 @@ export default function HeroSlider() {
             index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
           }`}
         >
-          {/* Background Image with Ken Burns Effect */}
+          {/* Background Image with Ken Burns Effect & Subtle Blur */}
           <div 
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[12000ms] ease-out ${
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[12000ms] ease-out blur-[4px] brightness-[0.7] ${
               index === current ? 'scale-110' : 'scale-100 dark:brightness-50'
             }`}
             style={{ backgroundImage: `url(${slide.image})` }}
