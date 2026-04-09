@@ -5,6 +5,8 @@ import { ThemeContext } from "@/contexts/ThemeContext";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import MobileHeader from "@/components/layout/MobileHeader";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +23,17 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <Toaster position="top-center" />
             <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
-              <Navbar />
-                <main className="flex-grow">
-                  {children}
-                </main>
-              <Footer />
+              <div className="hidden md:block">
+                <Navbar />
+              </div>
+              <MobileHeader />
+              <main className="flex-grow pt-16 pb-20 md:pt-0 md:pb-0">
+                {children}
+              </main>
+              <div className="hidden md:block">
+                <Footer />
+              </div>
+              <MobileBottomNav />
             </div>
           </AuthProvider>
         </ThemeContext>
