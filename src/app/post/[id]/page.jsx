@@ -14,9 +14,9 @@ import {
   Link as LinkIcon, 
   MessageSquare, 
   Heart,
-  ArrowRight,
-  Loader2
+  ArrowRight
 } from 'lucide-react';
+import Loader from '@/components/ui/Loader';
 import { formatRelativeDate, formatDateSimple, calculateReadingTime } from '@/utils/dateFormatter';
 import { getInitials } from '@/utils/textTruncate';
 import Button from '@/components/ui/Button';
@@ -70,9 +70,11 @@ const SinglePostPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center">
-        <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
-        <p className="font-bold text-lg animate-pulse">Loading story...</p>
+      <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-6">
+        <div className="w-48 h-1 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden relative">
+          <Loader />
+        </div>
+        <p className="font-bold text-sm text-slate-500 uppercase tracking-[0.3em] animate-pulse">Loading story...</p>
       </div>
     );
   }

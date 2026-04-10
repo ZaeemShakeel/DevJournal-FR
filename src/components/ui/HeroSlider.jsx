@@ -8,7 +8,7 @@ import Link from 'next/link';
 const slides = [
   {
     id: 1,
-    image: '/images/hero1.png',
+    image: '/images/community_hero.png',
     tag: 'Community',
     title: 'The Modern Hub for Developers',
     description: 'Join a thousand-strong community of builders sharing their daily journey in tech.',
@@ -16,7 +16,7 @@ const slides = [
   },
   {
     id: 2,
-    image: '/images/hero2.png',
+    image: '/images/hero1.png',
     tag: 'Knowledge',
     title: 'Flow with Digital Insights',
     description: 'Document your discoveries, from micro-services to front-end performance.',
@@ -24,7 +24,7 @@ const slides = [
   },
   {
     id: 3,
-    image: '/images/hero3.png',
+    image: '/images/hero2.png',
     tag: 'Innovation',
     title: 'Focus. Write. Inspire.',
     description: 'The cleanest markdown experience for developers who value speed and clarity.',
@@ -65,9 +65,9 @@ export default function HeroSlider() {
           <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/30 to-transparent" />
           
           {/* Content Grid */}
-          <div className="relative z-20 h-full container mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-center gap-12 pt-16">
+          <div className="relative z-20 h-full container mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-center gap-12 pt-8">
             {/* Left Column: Text & CTAs */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-center text-left mt-10">
+            <div className="w-full lg:w-1/2 flex flex-col justify-center text-left">
               <div className="flex items-center gap-2 mb-6 animate-slide-up">
                 <span className={`px-3 py-1 rounded-full bg-${slide.accent}/20 border border-${slide.accent}/30 text-${slide.accent} text-[10px] font-black uppercase tracking-[0.2em]`}>
                   {slide.tag}
@@ -79,7 +79,7 @@ export default function HeroSlider() {
               <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tighter animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 {slide.title.split(' ').map((word, i) => (
                   <span key={i} className="inline-block mr-3">
-                    {word === 'Modern' || word === 'Digital' || word === 'Inspire.' ? (
+                    {['Modern', 'Digital', 'Inspire.', 'Zaeem', 'Community'].includes(word.replace(/[:.]/g, '')) ? (
                       <span className={`text-gradient-primary`}>{word}</span>
                     ) : word}
                   </span>
@@ -115,17 +115,32 @@ export default function HeroSlider() {
                 {/* Main Card */}
                 <div className="absolute inset-0 glass-morphism rounded-[2.5rem] border-white/10 shadow-2xl p-6 transform rotate-3 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-secondary" />
+                    <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg border-2 border-primary/50">
+                      <img 
+                        src="https://res.cloudinary.com/dc4pe4cc1/image/upload/v1760078385/infodemo/vdahj9tgbsfqm1pirmmj.png" 
+                        alt="Zaeem Shakeel" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div>
-                      <div className="h-2 w-24 bg-white/20 rounded-full mb-2" />
-                      <div className="h-1.5 w-16 bg-white/10 rounded-full" />
+                      <div className="text-sm font-black text-white">Zaeem Shakeel</div>
+                      <div className="text-[10px] text-primary/80 font-bold uppercase tracking-widest">Founder of DevJournal</div>
                     </div>
                   </div>
-                  <div className="space-y-3 mb-6">
-                    <div className="h-6 w-full bg-white/10 rounded-lg" />
-                    <div className="h-6 w-3/4 bg-white/10 rounded-lg" />
+                  <div className="space-y-2 mb-4">
+                    <div className="text-xs font-black text-white leading-tight">Building the Future of Dev Community</div>
+                    <div className="text-[10px] text-white/60 leading-relaxed line-clamp-2">
+                      Empowering developers to connect, share, and grow together in a modern ecosystem.
+                    </div>
                   </div>
-                  <div className="flex-grow w-full bg-white/5 rounded-2xl border border-white/10 mb-4" />
+                  <div className="flex-grow w-full rounded-2xl overflow-hidden border border-white/10 mb-4 relative group">
+                    <img 
+                      src="/images/community_hero.png" 
+                      alt="Featured Post" 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
                   <div className="mt-auto flex justify-between pt-4 border-t border-white/5">
                     <div className="flex gap-4">
                       <MessageSquare className="text-white/40" size={16} />
@@ -144,9 +159,16 @@ export default function HeroSlider() {
                 </div>
 
                 <div className="absolute -bottom-8 -left-8 glass-morphism rounded-[1.5rem] border-white/10 p-4 shadow-2xl animate-float rotate-[-6deg]">
-                   <div className="text-xs font-black text-white mb-2">Build. Share. Repeat.</div>
+                   <div className="text-xs font-black text-white mb-2 uppercase tracking-tighter">Post. Share. Repeat.</div>
                    <div className="flex -space-x-1.5">
-                     {[1,2,3].map(i => <div key={i} className="w-5 h-5 rounded-full bg-slate-700 border border-white/10" />)}
+                     {[1,2,3,4].map(i => (
+                       <div key={i} className="w-6 h-6 rounded-full border border-white/20 overflow-hidden shadow-sm">
+                          <img src={`https://i.pravatar.cc/100?u=${i + 40}`} alt="Community member" />
+                       </div>
+                     ))}
+                     <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[8px] font-bold text-white border border-white/20">
+                        +5k
+                     </div>
                    </div>
                 </div>
               </div>

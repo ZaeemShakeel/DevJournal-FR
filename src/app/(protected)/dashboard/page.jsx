@@ -19,6 +19,7 @@ import {
   MoreVertical,
   AlertTriangle
 } from 'lucide-react';
+import Loader from '@/components/ui/Loader';
 import Button from '@/components/ui/Button';
 import { StatsSkeleton } from '@/components/ui/Skeleton';
 import Modal from '@/components/ui/Modal';
@@ -116,7 +117,12 @@ const DashboardPage = () => {
 
           <div className="overflow-x-auto">
             {loading ? (
-              <div className="p-12 text-center text-slate-400">Loading your posts...</div>
+              <div className="p-20 flex flex-col items-center justify-center space-y-4">
+                <div className="w-48 h-1 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden relative">
+                  <Loader />
+                </div>
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold animate-pulse">Synchronizing Posts</p>
+              </div>
             ) : filteredPosts.length > 0 ? (
               <table className="w-full text-left">
                 <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 uppercase text-[10px] font-bold tracking-widest">

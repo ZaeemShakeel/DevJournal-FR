@@ -15,9 +15,9 @@ import {
   ArrowLeft,
   X,
   Plus,
-  Info,
-  Loader2
+  Info
 } from 'lucide-react';
+import Loader from '@/components/ui/Loader';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { toast } from 'react-hot-toast';
@@ -118,9 +118,11 @@ const EditPostPage = () => {
   if (isLoading) {
     return (
       <ProtectedRoute>
-        <div className="min-h-[50vh] flex flex-col items-center justify-center">
-          <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
-          <p className="font-bold">Loading post editor...</p>
+        <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-6">
+          <div className="w-48 h-1 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden relative">
+            <Loader />
+          </div>
+          <p className="font-bold text-sm text-slate-500 uppercase tracking-[0.3em] animate-pulse">Loading post editor...</p>
         </div>
       </ProtectedRoute>
     );

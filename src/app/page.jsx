@@ -9,6 +9,7 @@ import { PostSkeleton } from '@/components/ui/Skeleton';
 import Button from '@/components/ui/Button';
 import HeroSlider from '@/components/ui/HeroSlider';
 import { TrendingUp, Users, Award, MessageSquare, Plus, Sparkles } from 'lucide-react';
+import Loader from '@/components/ui/Loader';
 
 export default function Home() {
   const { isAuthenticated, user } = useAuth();
@@ -91,7 +92,14 @@ export default function Home() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {loading ? (
-            [1, 2].map(i => <PostSkeleton key={i} />)
+            <div className="lg:col-span-2 space-y-6">
+              <div className="w-full h-1 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden relative mb-4">
+                <Loader />
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {[1, 2].map(i => <PostSkeleton key={i} />)}
+              </div>
+            </div>
           ) : featuredPosts.length > 0 ? (
             featuredPosts.map(post => <PostCard key={post._id} post={post} />)
           ) : null}
@@ -124,6 +132,9 @@ export default function Home() {
 
             {loading ? (
               <div className="space-y-6">
+                <div className="w-full h-1 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden relative">
+                  <Loader />
+                </div>
                 {[1, 2, 3].map(i => <PostSkeleton key={i} />)}
               </div>
             ) : feedPosts.length > 0 ? (
