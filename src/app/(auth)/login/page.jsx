@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -41,17 +42,24 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen pt-24 pb-12 flex items-center justify-center px-4 relative">
       {/* Decorative background elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary/20 rounded-full blur-3xl -z-10" />
+      <style>{`
+        @keyframes drift1 { 0% { transform: translate(0px, 0px) scale(1); } 33% { transform: translate(50px, -50px) scale(1.1); } 66% { transform: translate(-30px, 40px) scale(0.9); } 100% { transform: translate(0px, 0px) scale(1); } }
+        @keyframes drift2 { 0% { transform: translate(0px, 0px) scale(1); } 33% { transform: translate(-40px, 60px) scale(1.2); } 66% { transform: translate(40px, -30px) scale(0.8); } 100% { transform: translate(0px, 0px) scale(1); } }
+        .drift-1 { animation: drift1 15s ease-in-out infinite; }
+        .drift-2 { animation: drift2 18s ease-in-out infinite; }
+      `}</style>
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/30 dark:bg-primary/20 rounded-full blur-[100px] -z-10 drift-1" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/30 dark:bg-secondary/20 rounded-full blur-[100px] -z-10 drift-2" />
 
-      <div className="w-full max-w-md animate-fade-in">
-        <div className="glass p-8 rounded-[2rem] border-white/20 shadow-2xl">
-          <div className="text-center mb-10">
-            <h1 className="text-3xl font-extrabold mb-2">Welcome Back</h1>
-            <p className="text-slate-500 dark:text-slate-400">Continue your developer journey</p>
-          </div>
+      <div className="w-full max-w-md animate-fade-in relative z-10">
+        <StyledWrapper>
+          <div id="form">
+            <div id="welcome-lines">
+              <div id="welcome-line-1">DevJournal</div>
+              <div id="welcome-line-2">Welcome Back, Developer</div>
+            </div>
 
-          {error && (
+            {error && (
             <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-xl flex items-start gap-3 text-error text-sm">
               <AlertCircle className="shrink-0 mt-0.5" size={18} />
               <span>{error}</span>
@@ -110,34 +118,96 @@ const LoginPage = () => {
             </Button>
           </form>
 
-          <div className="relative my-8 text-center">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border-light dark:border-border-dark"></div>
-            </div>
-            <span className="relative px-4 bg-card-light dark:bg-card-dark text-xs text-slate-500 uppercase font-bold tracking-widest">
-              Or continue with
-            </span>
-          </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline" className="flex items-center justify-center gap-2">
-              <Github size={20} /> GitHub
-            </Button>
-            <Button variant="outline" className="flex items-center justify-center gap-2">
-              <Chrome size={20} /> Google
-            </Button>
-          </div>
-
-          <p className="mt-8 text-center text-slate-600 dark:text-slate-400">
+          <p className="mt-8 text-center text-slate-500 text-sm">
             Don't have an account?{' '}
             <Link href="/signup" className="text-primary font-bold hover:underline">
               Create an account
             </Link>
           </p>
+
+          <div id="bar" />
         </div>
+        </StyledWrapper>
       </div>
     </div>
   );
 };
 
 export default LoginPage;
+
+const StyledWrapper = styled.div`
+  #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 45px 35px;
+    background-color: hsl(240, 15%, 9%);
+    box-shadow: 0px 15px 60px rgba(139, 92, 246, 0.3);
+    outline: 1px solid var(--primary);
+    border-radius: 12px;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  html.light & #form {
+     background-color: #ffffff;
+     box-shadow: 0px 15px 60px rgba(139, 92, 246, 0.15);
+  }
+
+  #welcome-lines {
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 35px;
+  }
+
+  #welcome-line-1 {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 36px;
+  }
+
+  #welcome-line-2 {
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 8px;
+  }
+  
+  html.light & #welcome-line-2 {
+    color: #1a1a1a;
+  }
+
+  #bar {
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 28px;
+    height: 8px;
+    margin-left: -14px;
+    background-color: var(--primary);
+    border-radius: 10px;
+  }
+
+  #bar:before,
+  #bar:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #ececec;
+    border-radius: 50%;
+  }
+
+  html.dark & #bar:before, html.dark & #bar:after {
+    background-color: #444;
+  }
+
+  #bar:before {
+    right: -20px;
+  }
+
+  #bar:after {
+    right: -38px;
+  }
+`;

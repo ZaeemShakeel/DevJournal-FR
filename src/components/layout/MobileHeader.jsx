@@ -38,9 +38,15 @@ const MobileHeader = () => {
               className="flex items-center justify-center focus:outline-none"
             >
               {isAuthenticated ? (
-                <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-black ring-2 ring-primary/20 shadow-lg">
-                  {getInitials(user?.name)}
-                </div>
+                user?.profilePic ? (
+                  <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 shadow-lg">
+                    <img src={user.profilePic} alt={user.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-black ring-2 ring-primary/20 shadow-lg">
+                    {getInitials(user?.name)}
+                  </div>
+                )
               ) : (
                 <div className="p-2.5 text-slate-600 dark:text-slate-400">
                   <Menu size={22} />
@@ -86,9 +92,15 @@ const MobileHeader = () => {
 
           {isAuthenticated ? (
             <div className="mb-8">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-xl font-black mb-4 shadow-lg shadow-primary/20">
-                {getInitials(user?.name)}
-              </div>
+              {user?.profilePic ? (
+                <div className="w-16 h-16 rounded-2xl overflow-hidden mb-4 shadow-lg shadow-primary/20">
+                  <img src={user.profilePic} alt={user.name} className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center text-xl font-black mb-4 shadow-lg shadow-primary/20">
+                  {getInitials(user?.name)}
+                </div>
+              )}
               <h3 className="text-lg font-black text-slate-900 dark:text-white leading-tight">{user?.name}</h3>
               <p className="text-sm text-slate-500 truncate mb-4">{user?.email}</p>
               

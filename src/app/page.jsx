@@ -198,7 +198,9 @@ export default function Home() {
                         {follow.initials}
                       </div>
                       <div>
-                        <p className="text-xs font-bold text-adaptive leading-none mb-1">{follow.name}</p>
+                        <Link href={`/dev/${follow.name.toLowerCase().replace(' ', '_')}`}>
+                          <p className="text-xs font-bold text-adaptive leading-none mb-1 hover:text-primary transition-colors cursor-pointer">{follow.name}</p>
+                        </Link>
                         <p className="text-[9px] text-muted-adaptive">{follow.role}</p>
                       </div>
                     </div>

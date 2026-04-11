@@ -9,10 +9,10 @@ export const usePosts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchPublicPosts = useCallback(async () => {
+  const fetchPublicPosts = useCallback(async (username = null) => {
     setLoading(true);
     try {
-      const response = await postsAPI.getAllPublic();
+      const response = await postsAPI.getAllPublic(username);
       if (response.data.success) {
         setPosts(response.data.data);
       }

@@ -153,7 +153,7 @@ const Footer = () => {
               © {currentYear}
             </span>
             <div className="h-3 w-px bg-slate-200 dark:bg-white/10" />
-            <span className="text-sm font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
+            <span className="text-sm font-black text-slate-900 dark:text-white tracking-tighter  leading-none">
               DevJournal<span className="text-primary italic">.</span>
             </span>
             <span className="text-[9px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest pl-2">

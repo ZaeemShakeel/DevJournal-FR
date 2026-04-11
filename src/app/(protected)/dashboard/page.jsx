@@ -73,11 +73,18 @@ const DashboardPage = () => {
             <h1 className="text-3xl font-extrabold mb-1">Welcome back, {user?.name}!</h1>
             <p className="text-slate-500">Manage your stories and see how they're performing.</p>
           </div>
-          <Link href="/create">
-            <Button className="h-12 px-6 shadow-lg shadow-primary/20">
-              <Plus size={20} className="mr-2" /> Create New Post
-            </Button>
-          </Link>
+          <div className="flex gap-3">
+            <Link href="/profile/settings">
+              <Button variant="outline" className="h-12 shadow-sm">
+                Profile Setting
+              </Button>
+            </Link>
+            <Link href="/create">
+              <Button className="h-12 px-6 shadow-lg shadow-primary/20">
+                <Plus size={20} className="mr-2" /> Create New Post
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Stats Grid */}

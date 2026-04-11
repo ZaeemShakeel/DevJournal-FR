@@ -115,12 +115,22 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 py-6 border-y border-border-light dark:border-border-dark">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white text-lg font-bold shadow-md">
-                {getInitials(post.author?.name)}
-              </div>
+              <Link href={`/dev/${post.author?.username || 'zaeem_dev'}`}>
+                {post.author?.profilePic ? (
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 shadow-md hover:scale-105 transition-transform">
+                    <img src={post.author.profilePic} alt={post.author.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white text-lg font-bold shadow-md hover:scale-105 transition-transform">
+                    {getInitials(post.author?.name)}
+                  </div>
+                )}
+              </Link>
               <div className="text-left">
-                <p className="font-bold text-slate-900 dark:text-slate-100">{post.author?.name}</p>
-                <p className="text-xs text-slate-500">Author & Developer</p>
+                <Link href={`/dev/${post.author?.username || 'zaeem_dev'}`}>
+                  <p className="font-bold text-slate-900 dark:text-slate-100 hover:text-primary transition-colors cursor-pointer">{post.author?.name}</p>
+                </Link>
+                <p className="text-xs text-slate-500">{post.author?.designation || 'Author & Developer'}</p>
               </div>
             </div>
             
@@ -201,17 +211,27 @@ const SinglePostPage = () => {
 
           {/* About Author Card */}
           <div className="mt-20 p-8 rounded-[2rem] bg-slate-50 dark:bg-slate-900/50 border border-border-light dark:border-border-dark flex flex-col md:flex-row items-center gap-8">
-            <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-3xl font-bold shadow-xl shrink-0">
-              {getInitials(post.author?.name)}
-            </div>
+            <Link href={`/dev/${post.author?.username || 'zaeem_dev'}`} className="shrink-0">
+               {post.author?.profilePic ? (
+                  <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
+                    <img src={post.author.profilePic} alt={post.author.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+               ) : (
+                  <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-3xl font-bold shadow-xl hover:scale-105 transition-transform">
+                    {getInitials(post.author?.name)}
+                  </div>
+               )}
+            </Link>
             <div className="text-center md:text-left">
               <h3 className="text-xl font-bold mb-2">Written by {post.author?.name}</h3>
               <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-xl">
-                A dedicated developer who loves sharing insights about modern technology and software development. Follow for more deep dives into the world of programming.
+                {post.author?.bio || 'A dedicated developer who loves sharing insights about modern technology and software development. Follow for more deep dives into the world of programming.'}
               </p>
               <div className="flex justify-center md:justify-start gap-4">
                 <Button variant="outline" size="sm" className="rounded-full">Follow Author</Button>
-                <Button variant="ghost" size="sm" className="rounded-full">View Profile</Button>
+                <Link href={`/dev/${post.author?.username || 'zaeem_dev'}`}>
+                  <Button variant="ghost" size="sm" className="rounded-full">View Profile</Button>
+                </Link>
               </div>
             </div>
           </div>

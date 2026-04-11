@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, MessageSquare, Heart, Sparkles, Zap } from 'lucide-react';
 import Button from './Button';
 import Link from 'next/link';
+import PostCard from './PostCard';
 
 const slides = [
   {
@@ -79,7 +80,7 @@ export default function HeroSlider() {
               <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tighter animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 {slide.title.split(' ').map((word, i) => (
                   <span key={i} className="inline-block mr-3">
-                    {['Modern', 'Digital', 'Inspire.', 'Zaeem', 'Community'].includes(word.replace(/[:.]/g, '')) ? (
+                    {['Modern', 'Digital', 'Inspire', 'Write', 'Zaeem', 'Community'].includes(word.replace(/[:.,]/g, '')) ? (
                       <span className={`text-gradient-primary`}>{word}</span>
                     ) : word}
                   </span>
@@ -113,52 +114,32 @@ export default function HeroSlider() {
             <div className="hidden lg:flex w-1/2 flex-col items-center justify-center relative translate-y-10">
               <div className="relative w-[340px] h-[440px] animate-float">
                 {/* Main Card */}
-                <div className="absolute inset-0 glass-morphism rounded-[2.5rem] border-white/10 shadow-2xl p-6 transform rotate-3 flex flex-col">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg border-2 border-primary/50">
-                      <img 
-                        src="https://res.cloudinary.com/dc4pe4cc1/image/upload/v1760078385/infodemo/vdahj9tgbsfqm1pirmmj.png" 
-                        alt="Zaeem Shakeel" 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-sm font-black text-white">Zaeem Shakeel</div>
-                      <div className="text-[10px] text-primary/80 font-bold uppercase tracking-widest">Founder of DevJournal</div>
-                    </div>
-                  </div>
-                  <div className="space-y-2 mb-4">
-                    <div className="text-xs font-black text-white leading-tight">Building the Future of Dev Community</div>
-                    <div className="text-[10px] text-white/60 leading-relaxed line-clamp-2">
-                      Empowering developers to connect, share, and grow together in a modern ecosystem.
-                    </div>
-                  </div>
-                  <div className="flex-grow w-full rounded-2xl overflow-hidden border border-white/10 mb-4 relative group">
-                    <img 
-                      src="/images/community_hero.png" 
-                      alt="Featured Post" 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="mt-auto flex justify-between pt-4 border-t border-white/5">
-                    <div className="flex gap-4">
-                      <MessageSquare className="text-white/40" size={16} />
-                      <Heart className="text-white/40" size={16} />
-                    </div>
-                    <Sparkles className="text-primary" size={16} />
-                  </div>
+                <div className="absolute inset-0 transform rotate-3 flex flex-col pointer-events-none rounded-[1rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                  <PostCard post={{
+                    _id: "hero_" + slide.id,
+                    title: "Building the Future of Developer Communities",
+                    content: "Hey, I'm Zaeem, a developer and the founder of DevJournal. I built this platform to empower developers to connect, share their journeys, and grow together in a modern ecosystem. Welcome aboard!",
+                    tags: ["Founder", "Vision", "Community"],
+                    createdAt: new Date().toISOString(),
+                    likes: 1245,
+                    comments: 89,
+                    author: {
+                      name: "Zaeem Shakeel",
+                      username: "zaeem",
+                      profilePic: "https://res.cloudinary.com/dc4pe4cc1/image/upload/v1760078385/infodemo/vdahj9tgbsfqm1pirmmj.png"
+                    }
+                  }} />
                 </div>
                 
                 {/* Small Floating Cards */}
-                <div className="absolute -top-6 -right-16 glass-morphism rounded-[1.5rem] border-white/10 p-3 shadow-2xl animate-float-delayed rotate-12">
+                <div className="absolute bottom-16 left-0 glass-morphism rounded-[1.5rem] border-white/10 p-3 shadow-2xl animate-float-delayed rotate-12">
                   <div className="flex items-center gap-2">
                     <Zap className="text-accent" size={18} />
-                    <div className="text-[10px] font-bold text-white uppercase tracking-tight">Deploying now...</div>
+                    <div className="text-[10px] font-bold text-white uppercase tracking-tight">Posting now...</div>
                   </div>
                 </div>
 
-                <div className="absolute -bottom-8 -left-8 glass-morphism rounded-[1.5rem] border-white/10 p-4 shadow-2xl animate-float rotate-[-6deg]">
+                <div className="absolute bottom-16 -right-10 glass-morphism rounded-[1.5rem] border-white/10 p-4 shadow-2xl animate-float rotate-[-6deg]">
                    <div className="text-xs font-black text-white mb-2 uppercase tracking-tighter">Post. Share. Repeat.</div>
                    <div className="flex -space-x-1.5">
                      {[1,2,3,4].map(i => (

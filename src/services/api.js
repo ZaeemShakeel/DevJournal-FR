@@ -38,10 +38,12 @@ export const authAPI = {
   register: (data) => api.post('/auth/register', data),
   login: (data) => api.post('/auth/login', data),
   getMe: () => api.get('/auth/me'),
+  updateProfile: (data) => api.put('/auth/profile', data),
+  getUserProfile: (username) => api.get(`/auth/dev/${username}`),
 };
 
 export const postsAPI = {
-  getAllPublic: () => api.get('/posts/public'),
+  getAllPublic: (username) => api.get('/posts/public', { params: { username } }),
   getUserPosts: (params) => api.get('/posts', { params: { author: 'me', ...params } }),
   getOne: (id) => api.get(`/posts/${id}`),
   create: (data) => api.post('/posts', data),

@@ -82,9 +82,15 @@ const Navbar = () => {
               {isAuthenticated ? (
                 <div className="relative group">
                   <button className="flex items-center gap-2 p-1 rounded-full border border-border-light dark:border-border-dark hover:shadow-md transition-all">
-                    <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
-                      {getInitials(user?.name)}
-                    </div>
+                    {user?.profilePic ? (
+                      <div className="w-8 h-8 rounded-full overflow-hidden shadow-sm">
+                        <img src={user.profilePic} alt={user.name} className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
+                        {getInitials(user?.name)}
+                      </div>
+                    )}
                   </button>
                   
                   {/* Dropdown */}
@@ -156,9 +162,15 @@ const Navbar = () => {
           {isAuthenticated ? (
             <div className="space-y-4">
               <div className="flex items-center gap-4 p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl">
-                <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold">
-                  {getInitials(user?.name)}
-                </div>
+                {user?.profilePic ? (
+                  <div className="w-12 h-12 rounded-full overflow-hidden shadow-sm">
+                    <img src={user.profilePic} alt={user.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold">
+                    {getInitials(user?.name)}
+                  </div>
+                )}
                 <div>
                   <p className="font-bold">{user?.name}</p>
                   <p className="text-sm text-slate-500">{user?.email}</p>
