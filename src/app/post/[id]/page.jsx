@@ -70,11 +70,24 @@ const SinglePostPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-6">
-        <div className="w-48 h-1 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden relative">
-          <Loader />
+      <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background-light dark:bg-background-dark transition-colors duration-500">
+        <div className="relative">
+          <div className="absolute inset-0 bg-blue-500/20 blur-[100px] rounded-full animate-pulse" />
+          <div className="relative z-10 flex flex-col items-center">
+              <div className="w-48 h-1 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden relative">
+                  <Loader />
+              </div>
+              <div className="mt-8 flex flex-col items-center space-y-2">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-[0.3em] animate-pulse">
+                      DevJournal
+                  </h3>
+                  <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-widest">
+                      Loading Story
+                  </p>
+              </div>
+          </div>
         </div>
-        <p className="font-bold text-sm text-slate-500 uppercase tracking-[0.3em] animate-pulse">Loading story...</p>
       </div>
     );
   }
@@ -93,56 +106,55 @@ const SinglePostPage = () => {
 
       <article className="animate-fade-in pb-20">
         {/* Post Hero */}
-        <header className="container mx-auto max-w-4xl px-4 md:px-6 pt-28 text-center">
-          <button 
-            onClick={() => router.back()}
-            className="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-primary transition-colors mb-8 group"
-          >
-            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back
-          </button>
+        <header className="container mx-auto max-w-4xl px-4 md:px-6 pt-8 md:pt-24 text-center relative z-10">
 
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
+          {/* Tags */}
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
             {post.tags?.map((tag, idx) => (
-              <span key={idx} className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+              <span key={idx} className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider shadow-sm">
                 #{tag}
               </span>
             ))}
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight tracking-tight">
+          {/* Title */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-10 leading-[1.1] tracking-tight text-slate-900 dark:text-white relative">
             {post.title}
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 py-6 border-y border-border-light dark:border-border-dark">
-            <div className="flex items-center gap-3">
-              <Link href={`/dev/${post.author?.username || 'zaeem_dev'}`}>
+          {/* Premium Author & Meta Pill */}
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 py-3 px-6 sm:px-8 rounded-[2rem] bg-white/60 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/60 dark:border-white/10 shadow-xl shadow-primary/5 mb-5">
+            <div className="flex items-center gap-4">
+              <Link href={`/dev/${post.author?.username}`}>
                 {post.author?.profilePic ? (
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 shadow-md hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-[3px] border-white dark:border-slate-800 shadow-md hover:scale-105 transition-transform">
                     <img src={post.author.profilePic} alt={post.author.name} className="w-full h-full object-cover" />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white text-lg font-bold shadow-md hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-lg font-black shadow-md hover:scale-105 transition-transform border-[3px] border-white dark:border-slate-800">
                     {getInitials(post.author?.name)}
                   </div>
                 )}
               </Link>
-              <div className="text-left">
-                <Link href={`/dev/${post.author?.username || 'zaeem_dev'}`}>
-                  <p className="font-bold text-slate-900 dark:text-slate-100 hover:text-primary transition-colors cursor-pointer">{post.author?.name}</p>
+              <div className="text-left flex flex-col justify-center">
+                <Link href={`/dev/${post.author?.username}`}>
+                  <p className="font-bold text-slate-900 dark:text-slate-100 hover:text-primary transition-colors cursor-pointer leading-tight mb-0.5">{post.author?.name}</p>
                 </Link>
-                <p className="text-xs text-slate-500">{post.author?.designation || 'Author & Developer'}</p>
+                <p className="text-xs text-slate-500 font-medium leading-tight">{post.author?.designation || 'Author & Developer'}</p>
               </div>
             </div>
             
-            <div className="h-6 w-[1px] bg-border-light dark:bg-border-dark hidden sm:block" />
+            {/* Divider */}
+            <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700" />
+            <div className="sm:hidden w-12 h-[1px] bg-slate-200 dark:bg-slate-800" />
 
-            <div className="flex items-center gap-6 text-sm text-slate-500 font-medium">
+            <div className="flex items-center gap-5 text-[13px] text-slate-500 font-semibold uppercase tracking-wide">
               <div className="flex items-center gap-2">
-                <Calendar size={18} className="text-primary" />
+                <Calendar size={16} className="text-primary" />
                 {formatDateSimple(post.createdAt)}
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={18} className="text-secondary" />
+                <Clock size={16} className="text-secondary" />
                 {readingTime} min read
               </div>
             </div>
@@ -151,8 +163,9 @@ const SinglePostPage = () => {
 
         {/* Featured Image */}
         {post.coverImage && (
-          <div className="container mx-auto max-w-6xl px-4 md:px-6 mt-12 mb-16">
-            <div className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl">
+          <div className="container mx-auto max-w-5xl px-4 md:px-6 mt-16 mb-24 relative">
+            <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full -z-10 transform scale-90 translate-y-10" />
+            <div className="w-full aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/50 dark:border-slate-800/50 backdrop-blur-sm relative z-10 hover:scale-[1.01] transition-transform duration-700">
               <img 
                 src={post.coverImage} 
                 alt={post.title} 
@@ -164,7 +177,7 @@ const SinglePostPage = () => {
 
         {/* Content */}
         <div className="container mx-auto max-w-4xl px-4 md:px-6">
-          <div className="prose prose-slate dark:prose-invert max-w-none text-lg leading-relaxed md:text-xl md:leading-loose text-slate-700 dark:text-slate-300 whitespace-pre-wrap mb-20">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-center md:text-left text-lg leading-relaxed md:text-xl md:leading-loose text-slate-700 dark:text-slate-300 whitespace-pre-wrap mb-20">
             {post.content}
           </div>
 

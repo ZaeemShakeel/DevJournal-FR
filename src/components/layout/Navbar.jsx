@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import ThemeToggle from './ThemeToggle';
-import { Menu, X, LogOut, LayoutDashboard, Home, User as UserIcon, LogIn, UserPlus, Search } from 'lucide-react';
+import { Menu, X, LogOut, LayoutDashboard, Home, User as UserIcon, LogIn, UserPlus, Search, Compass } from 'lucide-react';
 import Button from '../ui/Button';
 import { getInitials } from '@/utils/textTruncate';
 
@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/', icon: Home },
+    { name: 'Feed', href: '/posts', icon: Compass },
     ...(isAuthenticated ? [{ name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard }] : []),
   ];
 

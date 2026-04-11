@@ -3,14 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, Plus, Bell, User } from 'lucide-react';
+import { Home, Compass, Plus, Bell, User } from 'lucide-react';
 
 const MobileBottomNav = () => {
   const pathname = usePathname();
 
   const navItems = [
     { icon: Home, label: 'Home', href: '/' },
-    { icon: Search, label: 'Explore', href: '/search' },
+    { icon: Compass, label: 'Explore', href: '/posts' },
     { icon: Plus, label: 'Post', href: '/create', isAction: true },
     { icon: Bell, label: 'Alerts', href: '/notifications' },
     { icon: User, label: 'Account', href: '/dashboard' },

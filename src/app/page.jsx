@@ -10,6 +10,10 @@ import Button from '@/components/ui/Button';
 import HeroSlider from '@/components/ui/HeroSlider';
 import { TrendingUp, Users, Award, MessageSquare, Plus, Sparkles } from 'lucide-react';
 import Loader from '@/components/ui/Loader';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export default function Home() {
   const { isAuthenticated, user } = useAuth();
@@ -20,8 +24,8 @@ export default function Home() {
     fetchPublicPosts();
   }, [fetchPublicPosts]);
 
-  const featuredPosts = posts?.slice(0, 2) || [];
-  const feedPosts = posts?.slice(2) || [];
+  const featuredPosts = posts?.slice(0, 6) || [];
+  const feedPosts = posts?.slice(6) || [];
 
   return (
     <div className="space-y-16 pb-20 bg-background-light dark:bg-background-dark transition-colors duration-500">
@@ -90,7 +94,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="w-full">
           {loading ? (
             <div className="lg:col-span-2 space-y-6">
               <div className="w-full h-1 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden relative mb-4">
@@ -101,7 +105,23 @@ export default function Home() {
               </div>
             </div>
           ) : featuredPosts.length > 0 ? (
-            featuredPosts.map(post => <PostCard key={post._id} post={post} />)
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              spaceBetween={24}
+              slidesPerView={1}
+              breakpoints={{
+                768: { slidesPerView: 2 },
+              }}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              pagination={{ clickable: true, dynamicBullets: true }}
+              className="pb-12 !pt-2"
+            >
+              {featuredPosts.map(post => (
+                <SwiperSlide key={post._id} className="h-auto">
+                  <PostCard post={post} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           ) : null}
         </div>
       </section>

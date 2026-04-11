@@ -214,7 +214,6 @@ const SignupPage = () => {
             </Link>
           </p>
 
-          <div id="bar" />
         </div>
         </StyledWrapper>
       </div>
@@ -264,38 +263,5 @@ const StyledWrapper = styled.div`
   
   html.light & #welcome-line-2 {
     color: #1a1a1a;
-  }
-
-  #bar {
-    position: absolute;
-    left: 50%;
-    bottom: -4px;
-    width: 28px;
-    height: 8px;
-    margin-left: -14px;
-    background-color: var(--primary);
-    border-radius: 10px;
-  }
-
-  #bar:before,
-  #bar:after {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #ececec;
-    border-radius: 50%;
-  }
-
-  html.dark & #bar:before, html.dark & #bar:after {
-    background-color: #444;
-  }
-
-  #bar:before {
-    right: -20px;
-  }
-
-  #bar:after {
-    right: -38px;
   }
 `;

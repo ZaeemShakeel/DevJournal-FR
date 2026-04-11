@@ -184,7 +184,7 @@ const EditPostPage = () => {
                       placeholder="Enter a compelling title..."
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      className="w-full text-4xl md:text-5xl font-extrabold bg-transparent border-none outline-none placeholder:text-slate-300 dark:placeholder:text-slate-700 resize-none min-h-[60px]"
+                      className="w-full text-2xl md:text-3xl font-bold bg-transparent border-none outline-none placeholder:text-slate-300 dark:placeholder:text-slate-700 resize-none min-h-[40px] pt-2"
                       rows={1}
                       onInput={(e) => {
                         e.target.style.height = 'auto';
@@ -208,12 +208,7 @@ const EditPostPage = () => {
                   </div>
                 ) : (
                   <div className="prose prose-slate dark:prose-invert max-w-none animate-fade-in">
-                    <h1 className="text-4xl md:text-5xl font-extrabold mb-8">{title || 'Untitled Post'}</h1>
-                    {coverImage && (
-                      <div className="w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-8">
-                        <img src={coverImage} alt="Post cover" className="w-full h-full object-cover" />
-                      </div>
-                    )}
+                    <h1 className="text-3xl md:text-4xl font-extrabold mb-8">{title || 'Untitled Post'}</h1>
                     <div className="whitespace-pre-wrap text-lg leading-relaxed opacity-90">
                       {content || 'Start typing in the editor tab to see the preview here...'}
                     </div>
@@ -228,29 +223,6 @@ const EditPostPage = () => {
             <div className="card p-6 space-y-8">
               <h3 className="text-lg font-bold border-b border-border-light dark:border-border-dark pb-3">Edit Settings</h3>
               
-              {/* Cover Image */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm font-bold">
-                  <ImageIcon size={18} className="text-primary" /> Cover Image URL
-                </div>
-                <Input 
-                  placeholder="https://images.unsplash.com/..." 
-                  value={coverImage}
-                  onChange={(e) => setCoverImage(e.target.value)}
-                />
-                {coverImage && (
-                  <div className="relative group rounded-xl overflow-hidden aspect-video border border-border-light dark:border-border-dark">
-                    <img src={coverImage} alt="Cover preview" className="w-full h-full object-cover" />
-                    <button 
-                      onClick={() => setCoverImage('')}
-                      className="absolute top-2 right-2 p-1.5 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={14} />
-                    </button>
-                  </div>
-                )}
-              </div>
-
               {/* Tags */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-sm font-bold">
